@@ -11,7 +11,7 @@ Vcs-Git: https://github.com/furilabs/furios-phosh-plugins.git
 
 Package: furios-phosh-plugins
 Architecture: any
-Pre-Depends: phosh
+Pre-Depends: phosh-plugins
 Depends: ${misc:Depends},
          ${shlibs:Depends}
 Description: Phosh plugins for FuriOS
