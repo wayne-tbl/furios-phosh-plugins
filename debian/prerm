@@ -1,0 +1,27 @@
+#!/bin/bash
+set -e
+
+TRIPLET=$(awk 'BEGIN { FS = "[ ()-]"; "bash --version" | getline; OFS = "-"; if (/bash/) print $9, $11, $12 }')
+PLUGIN_FURIOS_DIR="/usr/lib/${TRIPLET}/phosh/plugins-furios"
+PLUGIN_DIR="/usr/lib/${TRIPLET}/phosh/plugins"
+
+remove() {
+	if [ ! -d "$PLUGIN_FURIOS_DIR" ]; then
+		exit 0
+	fi
+
+	for file in ${PLUGIN_FURIOS_DIR}/*; do
+		if [ -f "$file" ]; then
+			filename=$(basename "$file")
+			if [ -e "$PLUGIN_DIR/$filename" ]; then
+				rm -f "$PLUGIN_DIR/$filename"
+			fi
+		fi
+	done
+}
+
+case "$1" in
+	"remove")
+		remove
+		;;
+esac

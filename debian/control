@@ -1,0 +1,17 @@
+Source: furios-phosh-plugins
+Section: libs
+Priority: optional
+Maintainer: Bardia Moshiri <bardia@furilabs.com>
+Build-Depends: debhelper-compat (= 13),
+               libphosh-0.45-dev,
+               meson,
+Standards-Version: 4.7.2
+Vcs-Browser: https://github.com/furilabs/furios-phosh-plugins
+Vcs-Git: https://github.com/furilabs/furios-phosh-plugins.git
+
+Package: furios-phosh-plugins
+Architecture: any
+Pre-Depends: phosh
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Description: Phosh plugins for FuriOS

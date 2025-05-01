@@ -1,0 +1,7 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@
+
+execute_after_dh_install:
+	mv debian/furios-phosh-plugins/usr/lib/$(DEB_HOST_MULTIARCH)/phosh/plugins debian/furios-phosh-plugins/usr/lib/$(DEB_HOST_MULTIARCH)/phosh/plugins-furios

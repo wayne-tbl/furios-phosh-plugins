@@ -1,0 +1,35 @@
+#!/bin/bash
+set -e
+
+TRIPLET=$(awk 'BEGIN { FS = "[ ()-]"; "bash --version" | getline; OFS = "-"; if (/bash/) print $9, $11, $12 }')
+PLUGIN_FURIOS_DIR="/usr/lib/${TRIPLET}/phosh/plugins-furios"
+PLUGIN_DIR="/usr/lib/${TRIPLET}/phosh/plugins"
+
+configure() {
+	if [ ! -d "${PLUGIN_FURIOS_DIR}" ]; then
+		exit 0
+	fi
+
+	if [ -z "$(ls -A ${PLUGIN_FURIOS_DIR} 2>/dev/null)" ]; then
+		exit 0
+	fi
+
+	mkdir -p ${PLUGIN_DIR}
+
+	# Create symlinks for each file in plugins-furios
+	for file in ${PLUGIN_FURIOS_DIR}/*; do
+		if [ -f "$file" ]; then
+			filename=$(basename "$file")
+			# Only create symlink if it doesn't exist yet
+			if [ ! -e "${PLUGIN_DIR}/${filename}" ]; then
+				ln -s "$file" "${PLUGIN_DIR}/${filename}"
+			fi
+		fi
+	done
+}
+
+case "$1" in
+	"configure")
+		configure
+		;;
+esac
