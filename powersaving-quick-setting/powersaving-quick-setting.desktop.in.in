@@ -1,0 +1,7 @@
+[Plugin]
+# Translators: This is an internal id, no need to translate it
+Id=@name@
+Name=Powersaving Quick Setting
+Types=quick-setting;
+Comment=Enable or disable powersaving mode
+Plugin=@plugins_dir@/libphosh-plugin-@name@.so
