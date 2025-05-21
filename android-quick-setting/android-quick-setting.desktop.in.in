@@ -1,0 +1,7 @@
+[Plugin]
+# Translators: This is an internal id, no need to translate it
+Id=@name@
+Name=Android Quick Setting
+Types=quick-setting;
+Comment=Start or stop Android
+Plugin=@plugins_dir@/libphosh-plugin-@name@.so
