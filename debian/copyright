@@ -4,6 +4,7 @@ Source: https://github.com/FuriLabs/furios-phosh-plugins
 
 Files: *
 Copyright: 2025 Bardia Moshiri <bardia@furilabs.com>
+           2026 Jeff Clemmons <jeff@antisocialparadise.net>
 License: GPL-3+
 
 Files: debian/*

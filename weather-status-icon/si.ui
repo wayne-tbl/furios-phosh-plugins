@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk+" version="3.24"/>
+  <template class="PhoshWeatherStatusIcon" parent="PhoshStatusIcon">
+    <property name="visible">1</property>
+    <property name="pixel-size">16</property>
+    <!-- Location and Battery (the built-ins we sit next to) default to
+         priority 10; higher sorts further left in PhoshStatusIconsBox. -->
+    <property name="priority">20</property>
+    <property name="extra-widget">temp_label</property>
+  </template>
+  <object class="GtkLabel" id="temp_label">
+    <property name="visible">1</property>
+  </object>
+</interface>
