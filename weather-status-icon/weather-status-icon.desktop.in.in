@@ -1,0 +1,7 @@
+[Plugin]
+# Translators: This is an internal id, no need to translate it
+Id=@name@
+Name=Weather Status Icon
+Types=status-icon;
+Comment=Shows current weather conditions using GeoClue location and libgweather (the same stack GNOME Weather uses).
+Plugin=@plugins_dir@/libphosh-plugin-@name@.so
