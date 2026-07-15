@@ -5,3 +5,4 @@ Name=Microphone Privacy Quick Setting
 Types=quick-setting;
 Comment=Allow or disallow access to microphone
 Plugin=@plugins_dir@/libphosh-plugin-@name@.so
+Icon=audio-input-microphone

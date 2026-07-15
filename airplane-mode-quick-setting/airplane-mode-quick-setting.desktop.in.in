@@ -5,3 +5,4 @@ Name=Airplane Mode Quick Setting
 Types=quick-setting;
 Comment=Enable or disable airplane mode
 Plugin=@plugins_dir@/libphosh-plugin-@name@.so
+Icon=airplane-mode

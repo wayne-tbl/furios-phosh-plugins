@@ -5,3 +5,4 @@ Name=Camera Privacy Quick Setting
 Types=quick-setting;
 Comment=Allow or disallow access to camera
 Plugin=@plugins_dir@/libphosh-plugin-@name@.so
+Icon=camera-photo

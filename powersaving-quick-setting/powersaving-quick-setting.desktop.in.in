@@ -5,3 +5,4 @@ Name=Powersaving Quick Setting
 Types=quick-setting;
 Comment=Enable or disable powersaving mode
 Plugin=@plugins_dir@/libphosh-plugin-@name@.so
+Icon=battery-full-charged

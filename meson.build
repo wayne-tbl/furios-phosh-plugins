@@ -10,6 +10,10 @@ project('furios-phosh-plugins', 'c',
 gnome = import('gnome')
 i18n = import('i18n')
 
+prefix = get_option('prefix')
+datadir = join_paths(prefix, get_option('datadir'))
+phosh_plugin_icon_dir = datadir / 'phosh' / 'plugins' / 'icons'
+
 pkgconfig = import('pkgconfig')
 phosh_plugins_dep = dependency('phosh-plugins')
 plugins_dir = phosh_plugins_dep.get_variable(pkgconfig: 'quick_setting_plugins_dir')
