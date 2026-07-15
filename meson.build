@@ -36,7 +36,6 @@ plugin_dep = declare_dependency(
 
 subdir('airplane-mode-quick-setting')
 subdir('camera-privacy-quick-setting')
-subdir('location-privacy-quick-setting')
 subdir('microphone-privacy-quick-setting')
 subdir('powersaving-quick-setting')
 subdir('android-quick-setting')
