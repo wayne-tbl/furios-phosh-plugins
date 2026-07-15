@@ -3,5 +3,5 @@
 Id=@name@
 Name=Weather Status Icon
 Types=status-icon;
-Comment=Shows current weather conditions using GeoClue location and libgweather (the same stack GNOME Weather uses).
+Comment=Shows current weather conditions using GeoClue location and libgweather
 Plugin=@plugins_dir@/libphosh-plugin-@name@.so

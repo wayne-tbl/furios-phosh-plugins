@@ -19,8 +19,7 @@
  * PhoshWeatherStatusIcon:
  *
  * Shows current weather conditions as a symbolic status icon, using
- * GeoClue for location and libgweather for conditions -- the same stack
- * GNOME Weather itself uses, rather than talking to a weather API directly.
+ * GeoClue for location and libgweather for conditions.
  */
 
 struct _PhoshWeatherStatusIcon {
@@ -153,7 +152,7 @@ update_weather_for_location (PhoshWeatherStatusIcon *self, GWeatherLocation *loc
   gweather_info_set_enabled_providers (self->weather,
                                        GWEATHER_PROVIDER_METAR | GWEATHER_PROVIDER_MET_NO);
   g_signal_connect_object (self->weather, "updated",
-                            G_CALLBACK (on_weather_updated), self, 0);
+                           G_CALLBACK (on_weather_updated), self, 0);
   gweather_info_update (self->weather);
 }
 
@@ -203,6 +202,7 @@ get_saved_location (void)
   g_autoptr (GSettings) settings = NULL;
   g_autoptr (GVariant) locations = NULL;
   g_autoptr (GVariant) first = NULL;
+  g_autoptr (GVariant) unboxed = NULL;
   g_autoptr (GWeatherLocation) world = NULL;
 
   if (!source)
@@ -217,14 +217,11 @@ get_saved_location (void)
   if (g_variant_n_children (locations) == 0)
     return NULL;
 
-  /* "locations" is type "av": each element is a boxed variant wrapping the
-   * actual serialized (uv) location tuple, so it must be unboxed first. */
   first = g_variant_get_child_value (locations, 0);
-  {
-    g_autoptr (GVariant) unboxed = g_variant_get_variant (first);
-    world = gweather_location_get_world ();
-    return gweather_location_deserialize (world, unboxed);
-  }
+  unboxed = g_variant_get_variant (first);
+  world = gweather_location_get_world ();
+
+  return gweather_location_deserialize (world, unboxed);
 }
 
 
@@ -242,7 +239,7 @@ on_geoclue_ready (GObject *source, GAsyncResult *result, gpointer user_data)
   }
 
   g_signal_connect_object (self->geoclue, "notify::location",
-                            G_CALLBACK (on_geoclue_location_changed), self, 0);
+                           G_CALLBACK (on_geoclue_location_changed), self, 0);
   on_geoclue_location_changed (self->geoclue, NULL, self);
 }
 
@@ -283,7 +280,7 @@ phosh_weather_status_icon_class_init (PhoshWeatherStatusIconClass *klass)
   object_class->dispose = phosh_weather_status_icon_dispose;
 
   gtk_widget_class_set_template_from_resource (widget_class,
-                                                "/mobi/phosh/plugins/weather-status-icon/si.ui");
+                                               "/mobi/phosh/plugins/weather-status-icon/si.ui");
   gtk_widget_class_bind_template_child (widget_class, PhoshWeatherStatusIcon, temp_label);
 }
 
@@ -301,10 +298,11 @@ phosh_weather_status_icon_init (PhoshWeatherStatusIcon *self)
 
   if (source)
     schema = g_settings_schema_source_lookup (source, "org.gnome.GWeather4", TRUE);
+
   if (schema) {
     self->gweather_settings = g_settings_new ("org.gnome.GWeather4");
     g_signal_connect_object (self->gweather_settings, "changed::temperature-unit",
-                              G_CALLBACK (on_temp_unit_changed), self, 0);
+                             G_CALLBACK (on_temp_unit_changed), self, 0);
   }
 
   saved = get_saved_location ();

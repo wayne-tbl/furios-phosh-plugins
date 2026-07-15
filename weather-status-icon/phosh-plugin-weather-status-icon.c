@@ -20,9 +20,9 @@ g_io_module_load (GIOModule *module)
   g_type_module_use (G_TYPE_MODULE (module));
 
   g_io_extension_point_implement (PHOSH_PLUGIN_EXTENSION_POINT_STATUS_ICON_WIDGET,
-                                   PHOSH_TYPE_WEATHER_STATUS_ICON,
-                                   PLUGIN_NAME,
-                                   10);
+                                  PHOSH_TYPE_WEATHER_STATUS_ICON,
+                                  PLUGIN_NAME,
+                                  10);
 }
 
 
