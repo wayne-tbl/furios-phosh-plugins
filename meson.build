@@ -12,6 +12,8 @@ i18n = import('i18n')
 
 prefix = get_option('prefix')
 datadir = join_paths(prefix, get_option('datadir'))
+libexecdir = join_paths(prefix, get_option('libexecdir'))
+desktopdir = datadir / 'applications'
 phosh_plugin_icon_dir = datadir / 'phosh' / 'plugins' / 'icons'
 
 pkgconfig = import('pkgconfig')
@@ -40,4 +42,5 @@ subdir('microphone-privacy-quick-setting')
 subdir('powersaving-quick-setting')
 subdir('android-quick-setting')
 subdir('screenshot-quick-setting')
+subdir('screen-recorder-quick-setting')
 subdir('weather-status-icon')
