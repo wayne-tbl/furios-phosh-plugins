@@ -169,7 +169,18 @@ fi
 rm -f "$PIDFILE"
 
 # ---- start ----------------------------------------------------------------
-mkdir -p "$OUTDIR"
+# Check the output directory before starting anything. wf-recorder cannot say
+# why it failed -- it exits within a second either way -- so an unwritable
+# directory would otherwise be reported as the screen being asleep. This is a
+# real case, not a hypothetical: the FLX1s ships Videos owned by uid 1023
+# (Android media_rw) with ACLs, so nothing here can write to it until the owner
+# is changed.
+if ! mkdir -p "$OUTDIR" 2>/dev/null || [ ! -w "$OUTDIR" ]; then
+  notify "Recording failed" "Cannot write to $OUTDIR"
+  echo "failed: $OUTDIR is not writable"
+  exit 1
+fi
+
 file="$OUTDIR/screencast-$(date +%Y%m%d-%H%M%S).mp4"
 
 speed=$(get_num screen-recorder-speed 1.0)
